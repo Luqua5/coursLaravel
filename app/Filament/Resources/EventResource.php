@@ -47,6 +47,8 @@ class EventResource extends Resource
                     ->numeric()
                     ->default(0)
                     ->prefix('$'),
+                Forms\Components\BelongsToSelect::make('categories')
+                    ->relationship('categories', 'name')
             ]);
     }
 
@@ -70,6 +72,8 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('categories.name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -78,6 +82,7 @@ class EventResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                
             ])
             ->filters([
                 //
