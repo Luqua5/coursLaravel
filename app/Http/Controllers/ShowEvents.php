@@ -13,6 +13,8 @@ class ShowEvents extends Controller
      */
     public function __invoke(Request $request)
     {
-        return Inertia::render('Events',['events' => Event::with('categories')->get()]);
+        //dd(Event::with('categories')->paginate(10));
+
+        return Inertia::render('Events',['events' => Event::with('categories')->paginate(2)]);
     }
 }

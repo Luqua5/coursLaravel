@@ -1,16 +1,16 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
+import Pagination from '@/Pages/Pagination.vue'
 
 defineProps({
-    events: Array,
+    events: Object,
 });
 
 </script>
 
 <template>
     <AppLayout title="Evenements">
-        <template v-for="event in events">
+        <template v-for="event in events.data">
             <a :href="'/events/' + event.id">
                 <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
                     <img alt="Office"
@@ -32,5 +32,6 @@ defineProps({
                 </article>
             </a>
         </template>
+        <Pagination :links="events.links"></Pagination>
     </AppLayout>
 </template>
