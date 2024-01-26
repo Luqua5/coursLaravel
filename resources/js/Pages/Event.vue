@@ -1,10 +1,17 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
+import { router } from '@inertiajs/vue3'
 
 defineProps({
     event: Array,
 });
+
+function subscribe(id)
+{
+    router.post('/subscribe', {
+        event_id: id
+    });
+}
 
 </script>
 
@@ -28,6 +35,7 @@ defineProps({
                     {{ cateogry.name }}
                 </div>
             </div>
+            <button @click="subscribe(event.id)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">S'inscrire</button>
         </article>
     </AppLayout>
 </template>
