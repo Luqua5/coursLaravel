@@ -48,7 +48,12 @@ class EventResource extends Resource
                     ->default(0)
                     ->prefix('$'),
                 Forms\Components\BelongsToSelect::make('categories')
-                    ->relationship('categories', 'name')
+                    ->multiple()
+                    ->relationship('categories', 'name'),
+                Forms\Components\FileUpload::make('photo')
+                    ->image()
+                    ->disk('public')
+                    ->directory('events')
             ]);
     }
 
@@ -74,6 +79,9 @@ class EventResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('nb_users')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

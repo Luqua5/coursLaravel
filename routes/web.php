@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Event;
+use App\Http\Controllers\ShowEvents;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,12 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/events', ShowEvents::class)->name('events');
+
+Route::get('/events/{event}', function (Event $event) {
+    return Inertia::render('Event', ['event' => $event]);
+})->name('event');
 
 Route::middleware([
     'auth:sanctum',

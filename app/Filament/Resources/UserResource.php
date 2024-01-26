@@ -27,6 +27,9 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')->email()->required(),
                 Forms\Components\TextInput::make('password')->password()->autocomplete('new-password')->required(),
                 Forms\Components\TextInput::make('password_confirmation')->password()->autocomplete('new-password')->required(),
+                Forms\Components\BelongsToSelect::make('events')
+                    ->multiple()
+                    ->relationship('events', 'title')
             ]);
     }
 
@@ -36,6 +39,9 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('events.title')
+                    ->label('Evenements')
+                    ->searchable(),
             ])
             ->filters([
                 //
