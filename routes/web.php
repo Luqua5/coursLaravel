@@ -31,8 +31,7 @@ Route::get('/', function () {
 
 Route::get('/events', ShowEvents::class)->name('events');
 
-Route::post('/subscribe', SubscribeController::class)->name('subscribe');
-Route::post('/unsubscribe', UnsubscribeController::class)->name('unsubscribe');
+
 
 Route::get('/events/{event}', ShowEventController::class)->name('event');
 
@@ -44,4 +43,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::post('/subscribe', SubscribeController::class)->name('subscribe');
+    Route::post('/unsubscribe', UnsubscribeController::class)->name('unsubscribe');
 });
