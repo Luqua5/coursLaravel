@@ -5,7 +5,9 @@ use App\Models\Event;
 use App\Http\Controllers\ShowEvents;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\ShowEventController;
 use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\UnsubscribeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +32,9 @@ Route::get('/', function () {
 Route::get('/events', ShowEvents::class)->name('events');
 
 Route::post('/subscribe', SubscribeController::class)->name('subscribe');
+Route::post('/unsubscribe', UnsubscribeController::class)->name('unsubscribe');
 
-Route::get('/events/{event}', function (Event $event) {
-    return Inertia::render('Event', ['event' => $event]);
-})->name('event');
+Route::get('/events/{event}', ShowEventController::class)->name('event');
 
 Route::middleware([
     'auth:sanctum',

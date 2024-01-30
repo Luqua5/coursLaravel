@@ -68,10 +68,18 @@ class User extends Authenticatable
     }
 
     public function addUserToEvent($idEvent)
-    {
+    {   
         $this->events()->attach($idEvent);
     }   
 
+    public function removeUserFromEvent($idEvent)
+    {
+        $this->events()->detach($idEvent);
+    }   
 
+    public function isSubscribedToEvent($idEvent)
+    {
+        return $this->events()->where('id_event', $idEvent)->exists();
+    }
 
 }

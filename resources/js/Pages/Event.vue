@@ -4,11 +4,19 @@ import { router } from '@inertiajs/vue3'
 
 defineProps({
     event: Array,
+    isSubscribed: Boolean,
 });
 
 function subscribe(id)
-{
+{   
     router.post('/subscribe', {
+        event_id: id
+    });
+}
+
+function unsubscribe(id)
+{
+    router.post('/unsubscribe', {
         event_id: id
     });
 }
@@ -18,7 +26,7 @@ function subscribe(id)
 <template>
     <AppLayout title="Evenement">
         <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-            <img alt="Office" class="h-56 w-full object-cover" :src="'storage/' + event.photo" />
+            <img alt="Office" class="h-56 w-full object-cover" :src="'../storage/' + event.photo" />
 
             <div class="bg-white p-4 sm:p-6">
                 <time datetime="2022-10-10" class="block text-xs text-gray-500"> {{ event.start_date }} </time>
@@ -35,7 +43,10 @@ function subscribe(id)
                     {{ cateogry.name }}
                 </div>
             </div>
-            <button @click="subscribe(event.id)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">S'inscrire</button>
+            <button v-if="!isSubscribed" @click="subscribe(event.id)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">S'inscrire</button>
+            <button v-if="isSubscribed" @click="unsubscribe(event.id)" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Se desinscrire</button>
+
+
         </article>
     </AppLayout>
 </template>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SubscribeController extends Controller
+class UnsubscribeController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -12,7 +12,6 @@ class SubscribeController extends Controller
     public function __invoke(Request $request)
     {
         $user = $request->user();
-
-        $user->addUserToEvent($request->event_id);
+        $user->removeUserFromEvent($request->event_id);
     }
 }
