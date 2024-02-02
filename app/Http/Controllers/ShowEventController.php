@@ -13,7 +13,6 @@ class ShowEventController extends Controller
      */
     public function __invoke(Request $request, Event $event)
     {   
-
         $isSubscribed = $request->user()->isSubscribedToEvent($event->id);
 
         return Inertia::render('Event', ['event' => $event, 'isSubscribed' => $isSubscribed]);

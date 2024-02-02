@@ -28,11 +28,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
 Route::get('/events', ShowEvents::class)->name('events');
-
-
-
 Route::get('/events/{event}', ShowEventController::class)->name('event');
 
 Route::middleware([
