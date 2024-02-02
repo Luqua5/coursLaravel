@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
@@ -71,16 +72,12 @@ class Event extends Model
 
     static function getEventsByCategoryAndCity($category, $city)
     {
-        $query = DB::table('events')
-            ->join('events_categories', 'events.id', '=', 'events_categories.id_evenement')
-            ->join('categories', 'events_categories.id_category', '=', 'categories.id');
+            $query = self::query()
+                ->when($city, function ($query, $city) {
+                    $query->where('location',$city);
+                })
+                ->whereRelation('categories', 'id', $category);
 
-        if($city != '') {
-            $query->where('events.location',$city);
-        }
-        if($category != '') {
-            $query->where('categories.id', $category);
-        }
 
         return $query;
     }
