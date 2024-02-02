@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -60,12 +61,25 @@ class Event extends Model
     }
 
     /**
-     * Get events of the current category
+     * Get all the city of the events
      */
-    static function getEventsOfCategory($category_id)
+    static function getCities()
     {
-        return Event::whereHas('categories', function($q) use ($category_id) {
-            $q->where('id_category', $category_id);
-        })->with('categories');
+        return Event::select('location')->distinct()->get();
+    }
+
+
+    static function getEventsByCategoryAndCity($category, $city)
+    {
+        $query = DB::table('events')
+            ->join('events_categories', 'events.id', '=', 'events_categories.id_evenement')
+            ->join('categories', 'events_categories.id_category', '=', 'categories.id');
+        if($city != '') {
+            $query->where('events.location',$city);
+        }
+        if($category != '') {
+            $query->where('categories.id', $category);
+        }
+        return $query;
     }
 }
