@@ -23,7 +23,7 @@ function changeCategory(event)
         <div>
             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
             <select @change="changeCategory" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option selected>Choose a cateogry</option>
+                <option value="0" selected>Choose a cateogry</option>
                 <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
             </select>
         </div>
@@ -51,7 +51,7 @@ function changeCategory(event)
             </a>
         </template>
         </div>
-        <Pagination v-if="events.length > 2" :links="events.links" class="flex justify-around"></Pagination>
+        <Pagination v-if="events.data.length > 1" :links="events.links" class="flex justify-around"></Pagination>
         </div>
     </AppLayout>
 </template>
