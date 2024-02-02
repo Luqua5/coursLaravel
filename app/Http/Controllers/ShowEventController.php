@@ -15,6 +15,12 @@ class ShowEventController extends Controller
     {   
         $isSubscribed = $request->user()->isSubscribedToEvent($event->id);
 
-        return Inertia::render('Event', ['event' => $event, 'isSubscribed' => $isSubscribed]);
+        $idCategory = $event->categories()->first()->id;
+
+        return Inertia::render('Event', [
+            'event' => $event, 
+            'isSubscribed' => $isSubscribed,
+            'categories' => $event->getEventsByCategory($idCategory),
+        ]);
     }
 }

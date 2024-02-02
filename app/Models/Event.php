@@ -74,12 +74,21 @@ class Event extends Model
         $query = DB::table('events')
             ->join('events_categories', 'events.id', '=', 'events_categories.id_evenement')
             ->join('categories', 'events_categories.id_category', '=', 'categories.id');
+
         if($city != '') {
             $query->where('events.location',$city);
         }
         if($category != '') {
             $query->where('categories.id', $category);
         }
+
         return $query;
+    }
+
+    public function getEventsByCategory($idCategory)
+    {
+        return $this->whereHas('categories', function($query) use ($idCategory) {
+            $query->where('id', $idCategory);
+        })->get();
     }
 }
