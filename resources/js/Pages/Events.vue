@@ -10,7 +10,8 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout title="Evenements">
+    <AppLayout title="Evenements" >
+        <div class="mx-56">
         <div>
             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
             <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -18,11 +19,12 @@ defineProps({
                 <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
             </select>
         </div>
+        <div class="grid grid-cols-4 gap-8 auto-cols-max mt-4">
         <template v-for="event in events.data">
             <a :href="'/events/' + event.id">
-                <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
+                <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg h-full">
                     <img alt="Office"
-                        class="h-56 w-full object-cover" 
+                        class="h-56 w-full object-cover"
                         :src="'storage/' + event.photo"
                         />
 
@@ -40,6 +42,9 @@ defineProps({
                 </article>
             </a>
         </template>
-        <Pagination :links="events.links"></Pagination>
+        </div>
+        <Pagination :links="events.links" class="flex justify-around"></Pagination>
+        </div>
     </AppLayout>
 </template>
+
