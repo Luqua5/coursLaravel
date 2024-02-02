@@ -58,4 +58,14 @@ class Event extends Model
     {
         return $this->users()->count();
     }
+
+    /**
+     * Get events of the current category
+     */
+    static function getEventsOfCategory($category_id)
+    {
+        return Event::whereHas('categories', function($q) use ($category_id) {
+            $q->where('id_category', $category_id);
+        })->with('categories');
+    }
 }

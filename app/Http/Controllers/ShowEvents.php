@@ -13,10 +13,17 @@ class ShowEvents extends Controller
      * Handle the incoming request.
      */
     public function __invoke(Request $request)
-    {
+    {        
+        $articlePerPage = 2;
+        if($request->has('category_id')) {
+            $events = Event::getEventsOfCategory($request->category_id)->paginate(2);
+        } else {
+            $events = Event::with('categories')->paginate(2);
+        }
+        //dd($events);
         return Inertia::render('Events',
             [
-                'events' => Event::with('categories')->paginate(2),
+                'events' => $events,
                 'categories' => Category::all()
             ]);
     }

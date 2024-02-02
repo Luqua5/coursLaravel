@@ -1,12 +1,20 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Pagination from '@/Pages/Pagination.vue'
+import Pagination from '@/Pages/Pagination.vue';
+import { router } from '@inertiajs/vue3';
+
 
 defineProps({
     events: Object,
     categories: Array,
 });
 
+function changeCategory(event)
+{
+    router.post('/events', {
+        category_id: event.target.value
+    });
+}
 </script>
 
 <template>
@@ -14,7 +22,7 @@ defineProps({
         <div class="mx-56">
         <div>
             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
-            <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <select @change="changeCategory" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option selected>Choose a cateogry</option>
                 <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
             </select>
@@ -43,7 +51,7 @@ defineProps({
             </a>
         </template>
         </div>
-        <Pagination :links="events.links" class="flex justify-around"></Pagination>
+        <Pagination v-if="events.length > 2" :links="events.links" class="flex justify-around"></Pagination>
         </div>
     </AppLayout>
 </template>
