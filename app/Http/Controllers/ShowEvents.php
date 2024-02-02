@@ -14,17 +14,18 @@ class ShowEvents extends Controller
      */
     public function __invoke(Request $request)
     {        
-        $articlePerPage = 2;
-        if($request->has('category_id') && $request->category_id != 0) {
-            $events = Event::getEventsOfCategory($request->category_id)->paginate(2);
+        $articlePerPage = 12;
+        if($request->has('category') && $request->has('city')) {
+            $events = Event::getEventsByCategoryAndCity($request->category, $request->city)->paginate($articlePerPage);            
         } else {
-            $events = Event::with('categories')->paginate(2);
+            $events = Event::with('categories')->paginate($articlePerPage);
         }
-        //dd($events);
         return Inertia::render('Events',
             [
                 'events' => $events,
-                'categories' => Category::all()
+                'categories' => Category::all(),
+                'cities' => Event::getCities(),
+                'articlePerPage' => $articlePerPage,
             ]);
     }
 }
