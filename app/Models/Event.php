@@ -72,12 +72,15 @@ class Event extends Model
 
     static function getEventsByCategoryAndCity($category, $city)
     {
-            $query = self::query()
-                ->when($city, function ($query, $city) {
-                    $query->where('location',$city);
-                })
-                ->whereRelation('categories', 'id', $category);
-
+        $query = self::query()
+            ->when((string)$city, function ($query, string $city) {
+                $query->where('location',$city);
+            })
+            ->when((string)$category, function ($query, string $category) {
+                $query->whereHas('categories', function (Builder $query) use ($category) {
+                    $query->where('id', $category);
+                });
+            });
 
         return $query;
     }
@@ -85,7 +88,8 @@ class Event extends Model
     public function getEventsByCategory($idCategory)
     {
         return $this->whereHas('categories', function($query) use ($idCategory) {
-            $query->where('id', $idCategory);
+            $query->where('id', $idCategory)
+            ->where('events.id', '!=', $this->id);
         })->get();
     }
 }
