@@ -17,10 +17,13 @@ class ShowEventController extends Controller
 
         $idCategory = $event->categories()->first()->id;
 
+        $city = $event->location;
+
         return Inertia::render('Event', [
             'event' => $event, 
             'isSubscribed' => $isSubscribed,
             'categories' => $event->getEventsByCategory($idCategory),
+            'cities' => $event->getEventsByCity($city),
         ]);
     }
 }

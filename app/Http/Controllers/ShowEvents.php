@@ -15,7 +15,6 @@ class ShowEvents extends Controller
     public function __invoke(Request $request)
     {        
         $articlePerPage = 12;
-        //dump($request->all());
         if(($request->has('category') && $request->has('city')) || (!is_null($request->category) || !is_null($request->city))) {
             $events = Event::getEventsByCategoryAndCity($request->category, $request->city)->paginate($articlePerPage);            
         } else {

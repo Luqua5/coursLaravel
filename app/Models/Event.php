@@ -92,4 +92,12 @@ class Event extends Model
             ->where('events.id', '!=', $this->id);
         })->get();
     }
+
+    public function getEventsByCity($city)
+    {
+        return $this
+            ->where('location', $city)
+            ->where('events.id', '!=', $this->id)
+            ->get();
+    }
 }

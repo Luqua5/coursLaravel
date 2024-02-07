@@ -7,6 +7,7 @@ defineProps({
     event: Array,
     isSubscribed: Boolean,
     categories: Array,
+    cities: Array
 });
 
 function subscribe(id)
@@ -84,6 +85,7 @@ function unsubscribe(id)
                             </article>
                         </a>
                     </template>
+                    <p v-if="categories.length == 0" class="text-center text-gray-500">Aucun evenement dans cette categorie</p>
                 </div>
             </article>
         </div>
@@ -91,6 +93,29 @@ function unsubscribe(id)
         <div class="mx-56 mt-12 relative z-2">
             <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg bg-white  p-4 sm:p-6">
                 <h3 class="mt-0.5 text-5xl font-bold text-gray-900">Dans la même ville</h3>
+                <template v-for="city in cities">
+                    <a :href="'/events/' + city.id">
+                        <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg h-full">
+                            <img alt="Office"
+                                class="h-56 w-full object-cover"
+                                :src="'../storage/' + city.photo"
+                                />
+
+                            <div class="bg-white p-4 sm:p-6">
+                                <time datetime="2022-10-10" class="block text-xs text-gray-500"> {{ city.start_date }} </time>
+
+                                <a href="#">
+                                    <h3 class="mt-0.5 text-lg text-gray-900">{{ city.title }}</h3>
+                                </a>
+
+                                <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                                    {{ city.description }}
+                                </p>
+                            </div>
+                        </article>
+                    </a>
+                </template>
+                <p v-if="cities.length == 0" class="text-center text-gray-500">Aucun evenement dans cette ville</p>
             </article>        
         </div>
         
