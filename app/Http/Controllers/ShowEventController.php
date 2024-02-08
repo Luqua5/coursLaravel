@@ -19,11 +19,15 @@ class ShowEventController extends Controller
 
         $city = $event->location;
 
+        $reviews = $event->reviews()->with('user')->get();
+
+
         return Inertia::render('Event', [
             'event' => $event,
             'isSubscribed' => $isSubscribed,
             'categories' => $event->getEventsByCategory($idCategory),
             'cities' => $event->getEventsByCity($city),
+            'reviews' => $reviews,
         ]);
     }
 }

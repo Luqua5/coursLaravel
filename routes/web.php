@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ShowEventController;
 use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\PostReviewController;
 use App\Http\Controllers\UnsubscribeController;
 
 /*
@@ -29,7 +30,6 @@ Route::get('/', function () {
     ]);
 });
 Route::any('/events', ShowEvents::class)->name('events');
-Route::get('/events/{event}', ShowEventController::class)->name('event');
 
 Route::middleware([
     'auth:sanctum',
@@ -41,4 +41,6 @@ Route::middleware([
     })->name('dashboard');
     Route::post('/subscribe', SubscribeController::class)->name('subscribe');
     Route::post('/unsubscribe', UnsubscribeController::class)->name('unsubscribe');
+    Route::get('/events/{event}', ShowEventController::class)->name('event');
+    Route::post('/review', PostReviewController::class)->name('review');
 });

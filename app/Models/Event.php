@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Review;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -106,5 +107,10 @@ class Event extends Model
             ->where('location', $city)
             ->where('events.id', '!=', $this->id)
             ->get();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }
