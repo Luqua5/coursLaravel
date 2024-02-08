@@ -45,10 +45,10 @@ watch([category, city], () => {
         <template v-for="event in events.data">
             <a :href="'/events/' + event.id">
                 <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg h-full">
-                    <img alt="Office"
-                        class="h-56 w-full object-cover"
+                    <div class="h-56 overflow-hidden"><img alt="Office"
+                        class="h-56 w-full object-cover transition-all duration-[1s] hover:h-96 hover:mt-[-70px]"
                         :src="'storage/' + event.photo"
-                        />
+                        /></div>
 
                     <div class="bg-white p-4 sm:p-6">
                         <time datetime="2022-10-10" class="block text-xs text-gray-500"> {{ event.start_date }} </time>

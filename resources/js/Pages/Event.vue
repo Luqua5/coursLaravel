@@ -33,7 +33,7 @@ function unsubscribe(id)
             <div class="absolute top-0 w-screen h-screen backdrop-blur-3xl"></div>
             <img alt="Office" class="object-cover w-full h-full " :src="'../storage/' + event.photo" />
         </div>
-        <div class="absolute top-24 pb-24">
+        <div class="absolute top-24 pb-24 w-screen">
         <div class="mx-56 mt-12 relative z-2">
         <article class="overflow-hidden rounded-lg shadow transition drop-shadow-xl hover:shadow-2xl">
             <img alt="Office" class="h-96 w-full object-cover" :src="'../storage/' + event.photo" />
