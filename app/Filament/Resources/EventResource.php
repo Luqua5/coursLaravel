@@ -49,11 +49,13 @@ class EventResource extends Resource
                     ->prefix('$'),
                 Forms\Components\BelongsToSelect::make('categories')
                     ->multiple()
-                    ->relationship('categories', 'name'),
+                    ->relationship('categories', 'name')
+                    ->required(),
                 Forms\Components\FileUpload::make('photo')
                     ->image()
                     ->disk('public')
                     ->directory('events')
+                    ->required(),
             ]);
     }
 
