@@ -29,10 +29,11 @@ function unsubscribe(id)
 <template>
 
     <AppLayout title="Evenement">
-        <div class="absolute w-screen h-screen top-0 overflow-hidden">
+        <div class="fixed w-screen h-screen top-0 overflow-hidden">
             <div class="absolute top-0 w-screen h-screen backdrop-blur-3xl"></div>
             <img alt="Office" class="object-cover w-full h-full " :src="'../storage/' + event.photo" />
         </div>
+        <div class="absolute top-24 pb-24">
         <div class="mx-56 mt-12 relative z-2">
         <article class="overflow-hidden rounded-lg shadow transition drop-shadow-xl hover:shadow-2xl">
             <img alt="Office" class="h-96 w-full object-cover" :src="'../storage/' + event.photo" />
@@ -116,9 +117,9 @@ function unsubscribe(id)
                     </a>
                 </template>
                 <p v-if="cities.length == 0" class="text-center text-gray-500">Aucun evenement dans cette ville</p>
-            </article>        
+            </article>
         </div>
-        
+        </div>
     </AppLayout>
 
 </template>

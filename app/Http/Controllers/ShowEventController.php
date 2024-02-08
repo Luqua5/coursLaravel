@@ -12,7 +12,7 @@ class ShowEventController extends Controller
      * Handle the incoming request.
      */
     public function __invoke(Request $request, Event $event)
-    {   
+    {
         $isSubscribed = $request->user()->isSubscribedToEvent($event->id);
 
         $idCategory = $event->categories()->first()->id;
@@ -20,7 +20,7 @@ class ShowEventController extends Controller
         $city = $event->location;
 
         return Inertia::render('Event', [
-            'event' => $event, 
+            'event' => $event,
             'isSubscribed' => $isSubscribed,
             'categories' => $event->getEventsByCategory($idCategory),
             'cities' => $event->getEventsByCity($city),
