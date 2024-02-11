@@ -15,6 +15,7 @@ let rating = 0;
 
 function addReview(id)
 {
+    console.log(id, content, rating);
     router.post('/review', {
         event_id: id,
         content: content,
@@ -76,9 +77,8 @@ function unsubscribe(id)
 
             <div class="mx-56 mt-12 relative z-2">
                 <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg bg-white  p-4 sm:p-6">
-                    <h3 class="mt-0.5 text-5xl font-bold text-gray-900">Avis</h3>
-                    <div>
-                        <input v-model="content" type="text">
+                    <h3 class="mb-4 mt-0.5 text-5xl font-bold text-gray-900">Avis ({{ reviews.length }})</h3>
+                    <div class="mb-6">
                         <select name="rating" id="rating" v-model="rating">
                             <option value="0">0</option>
                             <option value="1">1</option>
@@ -87,18 +87,35 @@ function unsubscribe(id)
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button @click="addReview(event.id)" type="button">Poster</button>
-                        <div>
-                            <template v-for="review in reviews">
-                                <div>
-                                    <p>{{ review.user.name }}</p>
-                                    <p>{{ review.content }}</p>
-                                    <p>{{ review.rating }}</p>
-                                </div>
-                            </template>
+                        <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+                            <textarea v-model="content" id="comment" rows="6"
+                                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+                                placeholder="Write a comment..." required></textarea>
                         </div>
+                        <button @click="addReview(event.id)"
+                            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200">
+                            Poster
+                        </button>
                     </div>
-
+                    <template v-for="review in reviews">
+                        <article class=" border-t border-gray-200 p-6 text-base bg-white rounded-lg">
+                            <footer class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900"><img
+                                            class="mr-2 w-6 h-6 rounded-full"
+                                            src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                            alt="Michael Gough">{{ review.user.name }}</p>
+                                    <p class="text-sm text-gray-600"><time pubdate datetime="2022-02-08"
+                                            title="February 8th, 2022">Feb. 8, 2022</time></p>
+                                    <p class="text-sm text-gray-600">
+                                        {{ review.rating }}
+                                    </p>
+                                </div>
+                            </footer>
+                            <p class="text-gray-500">{{ review.content }}</p>
+                        </article>
+                    </template>
+                    <p v-if="reviews.length == 0" class="text-center text-gray-500">Aucun avis pour cet evenement</p>
                 </article>
             </div>
 

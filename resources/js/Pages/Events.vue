@@ -28,16 +28,16 @@ watch([category, city], () => {
     <AppLayout title="Evenements" >
         <div class="mx-56">
         <div>
-            <label for="categories" class="block mb-2 text-sm font-medium text-gray-900">Select une categorie</label>
+            <label for="categories" class="block mb-2 text-sm font-medium text-gray-900">Sélectionne une categorie</label>
             <select v-model="category" id="categories" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option value="" selected>Choose a category</option>
+                <option value="" selected>Choisis une catégorie</option>
                 <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
             </select>
         </div>
         <div>
-            <label for="cities" class="block mb-2 text-sm font-medium text-gray-900">Select une ville</label>
+            <label for="cities" class="block mb-2 text-sm font-medium text-gray-900">Sélectionne une ville</label>
             <select v-model="city" @change="changeCategoryCity" id="cities" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option value="" selected>Choose a ville</option>
+                <option value="" selected>Choisis une ville</option>
                 <option v-for="city in cities" :value="city.location">{{ city.location }}</option>
             </select>
         </div>
