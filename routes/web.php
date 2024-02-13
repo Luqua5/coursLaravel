@@ -5,6 +5,7 @@ use App\Models\Event;
 use App\Http\Controllers\ShowEvents;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ShowEventController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\PostReviewController;
@@ -36,9 +37,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', HomepageController::class)->name('dashboard');
     Route::post('/subscribe', SubscribeController::class)->name('subscribe');
     Route::post('/unsubscribe', UnsubscribeController::class)->name('unsubscribe');
     Route::get('/events/{event}', ShowEventController::class)->name('event');

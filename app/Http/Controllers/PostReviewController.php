@@ -22,7 +22,5 @@ class PostReviewController extends Controller
 
 
         $request->user()->reviews()->create($request->all());
-
-        return redirect()->back();
     }
 }

@@ -113,4 +113,12 @@ class Event extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public static function upcomingEvents()
+    {
+        return self::where('start_date', '>', now())
+            ->orderBy('start_date')
+            ->limit(5)
+            ->get();
+    }
 }

@@ -67,10 +67,11 @@ function unsubscribe(id)
                     </div>
                     <div class="flex justify-around bg-white">
                         <button v-if="!isSubscribed" @click="subscribe(event.id)" type="button"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">S'inscrire</button>
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            S'inscrire</button>
                         <button v-if="isSubscribed" @click="unsubscribe(event.id)" type="button"
-                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Se
-                            desinscrire</button>
+                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                            Se desinscrire</button>
                     </div>
                 </article>
             </div>
@@ -107,10 +108,9 @@ function unsubscribe(id)
                                             alt="Michael Gough">{{ review.user.name }}</p>
                                     <p class="text-sm text-gray-600"><time pubdate datetime="2022-02-08"
                                             title="February 8th, 2022">Feb. 8, 2022</time></p>
-                                    <p class="text-sm text-gray-600">
-                                        {{ review.rating }}
-                                    </p>
                                 </div>
+                                <p class="text-sm text-gray-600">{{ review.rating }}/5</p>
+
                             </footer>
                             <p class="text-gray-500">{{ review.content }}</p>
                         </article>

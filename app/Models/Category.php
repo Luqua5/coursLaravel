@@ -22,4 +22,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Event::class, 'events_categories', 'id_category', 'id_evenement');
     }
+
+    public static function CategoriesMostEvents()
+    {
+        return Category::withCount('events')->orderBy('events_count', 'desc')->limit(5)->get();
+    }
 }
