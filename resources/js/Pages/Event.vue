@@ -80,7 +80,13 @@ function unsubscribe(id)
                 <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg bg-white  p-4 sm:p-6">
                     <h3 class="mb-4 mt-0.5 text-5xl font-bold text-gray-900">Avis ({{ reviews.length }})</h3>
                     <div class="mb-6">
-                        <select name="rating" id="rating" v-model="rating">
+
+                        <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+                            <textarea v-model="content" id="comment" rows="6"
+                                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+                                placeholder="Write a comment..." required></textarea>
+                        </div>
+                        <select class="mr-2" name="rating" id="rating" v-model="rating">
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -88,13 +94,8 @@ function unsubscribe(id)
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-                            <textarea v-model="content" id="comment" rows="6"
-                                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
-                                placeholder="Write a comment..." required></textarea>
-                        </div>
                         <button @click="addReview(event.id)"
-                            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200">
+                            class="inline-flex items-center py-2.5 px-4 text-s font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200">
                             Poster
                         </button>
                     </div>
@@ -144,15 +145,17 @@ function unsubscribe(id)
                                 </article>
                             </a>
                         </template>
+                    </div>
                         <p v-if="categories.length == 0" class="text-center text-gray-500">Aucun evenement dans cette
                             categorie</p>
-                    </div>
+
                 </article>
             </div>
 
             <div class="mx-56 mt-12 relative z-2">
                 <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg bg-white  p-4 sm:p-6">
                     <h3 class="mt-0.5 text-5xl font-bold text-gray-900">Dans la même ville</h3>
+                    <div class="grid grid-cols-4 gap-8 auto-cols-max mt-4">
                     <template v-for="city in cities">
                         <a :href="'/events/' + city.id">
                             <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg h-full">
@@ -173,6 +176,7 @@ function unsubscribe(id)
                             </article>
                         </a>
                     </template>
+                    </div>
                     <p v-if="cities.length == 0" class="text-center text-gray-500">Aucun evenement dans cette ville</p>
                 </article>
             </div>
