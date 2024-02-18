@@ -53,9 +53,9 @@ defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-5">
                     <h3 class="mb-4 mt-0.5 text-5xl font-bold text-gray-900 pt-7 px-5">Les 5 catégories les plus populaires</h3>
-                    <div class="grid grid-cols-5 gap-8 auto-cols-max  pb-7 px-12">
+                    <div class="flex justify-between w-full  pb-7 px-12">
                         <template v-for="category in bestCategories">
-                            {{ category.name }}
+                            <span class="font-bold text-lg">{{ category.name }}</span>
                         </template>
                     </div>
                 </div>
